@@ -7,3 +7,14 @@ CREATE TABLE todo.user (
     authority TEXT
 );
 ```
+
+```sql
+CREATE TABLE todo.task {
+    number INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name TEXT,
+    deadline datetime,
+    priority TEXT
+    status TEXT,
+    date datetime,
+};
+```
