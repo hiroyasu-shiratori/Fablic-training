@@ -1,24 +1,25 @@
-# README
+## DBスキーマ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Userテーブル
+|      Field      |     Type     | Null | Key | Default |     Extra      |
+| --------------- | ------------ | ---- | --- | ------- | -------------- |
+| id              | BIGINT(20)   | NO   | PRI | NULL    | AUTO_INCREMENT |
+| user_id         | VARCHAR(20)  | NO   |     | NULL    |                |
+| name            | VARCHAR(100) | NO   |     | NULL    |                |
+| password_digest | VARCHAR(255) | NO   |     | NULL    |                |
+| authority       | VARCHAR(20)  | NO   |     | NULL    |                |
+| created_at      | TIMESTAMP    | NO   |     | NULL    |                |
+| updated_at      | TIMESTAMP    | NO   |     | NULL    |                |
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Taskテーブル
+|    Field    |     Type      | Null | Key | Default |     Extra      |
+| ----------- | ------------- | ---- | --- | ------- | -------------- |
+| id          | BIGINT(20)    | NO   | PRI | NULL    | AUTO_INCREMENT |
+| user_id     | VARCHAR(20)   | NO   |     | NULL    |                |
+| title       | VARCHAR(100)  | NO   |     | NULL    |                |
+| description | VARCHAR(1000) | YES  |     | NULL    |                |
+| status      | VARCHAR(10)   | YES  |     | NULL    |                |
+| priority    | VARCHAR(10)   | YES  |     | NULL    |                |
+| dead_line   | DATETIME      | YES  |     | NULL    |                |
+| created_at  | TIMESTAMP     | NO   |     | NULL    |                |
+| updated_at  | TIMESTAMP     | NO   |     | NULL    |                |
