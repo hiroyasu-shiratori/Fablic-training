@@ -1,5 +1,5 @@
 ```sql
-CREATE TABLE todo.User (
+CREATE TABLE todo.Users (
   id BIGINT(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   user_id VARCHAR(20) NOT NULL,
   name VARCHAR(100) NOT NULL,
@@ -11,14 +11,14 @@ CREATE TABLE todo.User (
 ```
 
 ```sql
-CREATE TABLE todo.Task {
+CREATE TABLE todo.Tasks {
   id BIGINT(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   user_id VARCHAR(20) NOT NULL,
   title VARCHAR(100) NOT NULL,
   description VARCHAR(1000),
   status VARCHAR(10),
   priority VARCHAR(10),
-  dead_line DATETIME,
+  deadline DATETIME,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
 };

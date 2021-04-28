@@ -1,6 +1,6 @@
 ## DBスキーマ
 
-### Userテーブル
+### Usersテーブル
 |      Field      |     Type     | Null | Key | Default |     Extra      |
 | --------------- | ------------ | ---- | --- | ------- | -------------- |
 | id              | BIGINT(20)   | NO   | PRI | NULL    | AUTO_INCREMENT |
@@ -11,7 +11,7 @@
 | created_at      | TIMESTAMP    | NO   |     | NULL    |                |
 | updated_at      | TIMESTAMP    | NO   |     | NULL    |                |
 
-### Taskテーブル
+### Tasksテーブル
 |    Field    |     Type      | Null | Key | Default |     Extra      |
 | ----------- | ------------- | ---- | --- | ------- | -------------- |
 | id          | BIGINT(20)    | NO   | PRI | NULL    | AUTO_INCREMENT |
@@ -20,6 +20,6 @@
 | description | VARCHAR(1000) | YES  |     | NULL    |                |
 | status      | VARCHAR(10)   | YES  |     | NULL    |                |
 | priority    | VARCHAR(10)   | YES  |     | NULL    |                |
-| dead_line   | DATETIME      | YES  |     | NULL    |                |
+| deadline   | DATETIME      | YES  |     | NULL    |                |
 | created_at  | TIMESTAMP     | NO   |     | NULL    |                |
 | updated_at  | TIMESTAMP     | NO   |     | NULL    |                |
