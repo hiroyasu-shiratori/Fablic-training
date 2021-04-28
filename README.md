@@ -28,6 +28,6 @@
 | description | VARCHAR(1000) | YES  |     | NULL    |                |
 | status      | VARCHAR(10)   | YES  |     | NULL    |                |
 | priority    | VARCHAR(10)   | YES  |     | NULL    |                |
-| deadline   | DATETIME      | YES  |     | NULL    |                |
+| deadline    | DATETIME      | YES  |     | NULL    |                |
 | created_at  | TIMESTAMP     | NO   |     | NULL    |                |
 | updated_at  | TIMESTAMP     | NO   |     | NULL    |                |
