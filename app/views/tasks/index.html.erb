@@ -1,2 +1,52 @@
-<h1>Tasks#index</h1>
-<p>Find me in app/views/tasks/index.html.erb</p>
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タスク管理画面</title>
+  <style type="text/css">
+    table, td, th {
+      border-collapse: collapse;
+      border: 1px solid;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>タスク管理画面</h1>
+
+  <%
+    keys = @tasks.column_names
+    vals = ['No', 'タスク名', '詳細', 'ステータス', '優先度', '期限', '作成時間', '更新時間']
+    heading = Hash[keys.zip(vals)]
+  %>
+
+  <table>
+    <thead>
+      <tr>
+        <th><%= heading[keys[0]] %></th>
+        <th><%= heading[keys[1]] %></th>
+        <th><%= heading[keys[3]] %></th>
+        <th><%= heading[keys[4]] %></th>
+        <th><%= heading[keys[5]] %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td><%= task[keys[0]] %></td>
+          <td><%= task[keys[1]] %></td>
+          <td><%= task[keys[3]] %></td>
+          <td><%= task[keys[4]] %></td>
+          <td><%= task[keys[5]] %></td>
+          <td>詳細</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</body>
+
+</html>
