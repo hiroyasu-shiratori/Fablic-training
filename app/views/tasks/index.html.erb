@@ -20,22 +20,22 @@
   <table>
     <thead>
       <tr>
-        <th><%= @heading[@keys[0]] %></th>
-        <th><%= @heading[@keys[1]] %></th>
-        <th><%= @heading[@keys[3]] %></th>
-        <th><%= @heading[@keys[4]] %></th>
-        <th><%= @heading[@keys[5]] %></th>
+        <th>No</th>
+        <th>タスク名</th>
+        <th>ステータス</th>
+        <th>優先度</th>
+        <th>期限</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <% @tasks.each do |task| %>
         <tr>
-          <td><%= task[@keys[0]] %></td>
-          <td><%= task[@keys[1]] %></td>
-          <td><%= task[@keys[3]] %></td>
-          <td><%= task[@keys[4]] %></td>
-          <td><%= task[@keys[5]] %></td>
+          <td><%= task.id %></td>
+          <td><%= task.title %></td>
+          <td><%= task.status %></td>
+          <td><%= task.priority %></td>
+          <td><%= task.deadline %></td>
           <td>詳細</td>
         </tr>
       <% end %>
