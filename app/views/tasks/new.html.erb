@@ -1,4 +1,27 @@
+<h1>タスクの新規登録</h1>
+
 <%= form_with(model: @task) do |form| %>
-  <%= form.text_field :title %>
-  <%= form.submit %>
+<p>
+  <%= form.label :title, 'タイトル' %><br />
+  <%= form.text_field :title, size: 27, maxlength: 100, required: true %>
+</p>
+<p>
+  <%= form.label :description, '説明' %><br />
+  <%= form.text_area :description, size: '26x3', maxlength: 1000 %>
+</p>
+<p>
+  <%= form.label :status, 'ステータス' %><br />
+  <%= form.select :status, [['未着手', 1], ['進行中', 2], ['完了', 3]], prompt: 'タスクの状態' %>
+</p>
+<p>
+  <%= form.label :priority, '優先度' %><br />
+  <%= form.select :priority, [['高', 1], ['中', 2], ['低', 3]], prompt: '優先度' %>
+</p>
+<p>
+  <%= form.label :deadline, '期限' %><br />
+  <%= form.datetime_field :deadline %>
+</p>
+<p>
+  <%= form.submit "タスクの作成" %>
+</p>
 <% end %>
