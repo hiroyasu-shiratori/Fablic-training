@@ -38,7 +38,18 @@
     </tbody>
   </table>
 
-  <p><%= button_to '編集', edit_task_path(@task.id), {method: :get} %></p>
+  <p>
+  <table>
+    <tr>
+      <td>
+        <%= button_to '削除', "/tasks/#{@task.id}", {method: :delete, data: {confirm: 'タスクを削除しても良いですか？'}} %>
+      </td>
+      <td>
+        <%= button_to '編集', edit_task_path(@task.id), {method: :get} %>
+      </td>
+    </tr>
+  </table>
+  </p>
 
 </body>
 
