@@ -6,14 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>タスク一覧</title>
-  <style type="text/css">
-    table,
-    td,
-    th {
-      border-collapse: collapse;
-      border: 1px solid;
-    }
-  </style>
 </head>
 
 <body>
@@ -40,7 +32,7 @@
         <td><%= task.status %></td>
         <td><%= task.priority %></td>
         <td><%= task.deadline %></td>
-        <td>詳細</td>
+        <td><%= button_to '詳細', task_path(task.id), {method: :get} %></td>
       </tr>
       <% end %>
     </tbody>
