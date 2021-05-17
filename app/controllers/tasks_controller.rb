@@ -13,6 +13,10 @@ class TasksController < ApplicationController
     redirect_to root_path
   end
 
+  def show
+    @task = Task.find(params[:id])
+  end
+
   def task_params
     params.require(:task).permit(:title, :description, :status, :priority, :deadline)
   end
