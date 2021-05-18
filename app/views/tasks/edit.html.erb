@@ -1,27 +1,16 @@
-<h1>タスクの編集</h1>
+<!DOCTYPE html>
+<html lang="ja">
 
-<%= form_with(model: @task) do |form| %>
-<p>
-  <%= form.label :title, 'タイトル' %><br />
-  <%= form.text_field :title, size: 27, maxlength: 100, required: true %>
-</p>
-<p>
-  <%= form.label :description, '説明' %><br />
-  <%= form.text_area :description, size: '26x3', maxlength: 1000 %>
-</p>
-<p>
-  <%= form.label :status, 'ステータス' %><br />
-  <%= form.select :status, [['未着手', '未着手'], ['進行中', '進行中'], ['完了', '完了']], prompt: 'タスクの状態' %>
-</p>
-<p>
-  <%= form.label :priority, '優先度' %><br />
-  <%= form.select :priority, [['高', '高'], ['中', '中'], ['低', '低']], prompt: '優先度' %>
-</p>
-<p>
-  <%= form.label :deadline, '期限' %><br />
-  <%= form.datetime_field :deadline %>
-</p>
-<p>
-  <%= form.submit "タスクの編集" %>
-</p>
-<% end %>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タスクの編集</title>
+</head>
+
+<body>
+  <h1>タスクの編集</h1>
+  <%= render partial: 'form', locals: {task: @task, text: '編集'} %>
+</body>
+
+</html>
