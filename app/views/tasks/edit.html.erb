@@ -1,0 +1,5 @@
+<% content_for(:html_title) {'タスクの編集'} %>
+
+<h1>タスクの編集</h1>
+<p><%= button_to '戻る', 'javascript:history.back()', {method: :get} %></p>
+<%= render partial: 'form', locals: {task: @task, text: '編集'} %>
