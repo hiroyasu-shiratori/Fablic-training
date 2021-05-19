@@ -68,7 +68,7 @@ Style/DocumentDynamicEvalDefinition:
 Style/EndlessMethod:
   Enabled: true
 Style/FrozenStringLiteralComment:
-  Enabled: false
+  Enabled: true
 Style/HashConversion:
   Enabled: true
 Style/HashExcept:
