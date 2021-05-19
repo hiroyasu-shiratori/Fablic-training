@@ -20,7 +20,7 @@ Gemspec/DateAssignment:
 Layout/SpaceBeforeBrackets:
   Enabled: true
 Layout/TrailingEmptyLines:
-  Enabled: true
+  EnforcedStyle: final_newline
 Lint/AmbiguousAssignment:
   Enabled: true
 Lint/DeprecatedConstants:
