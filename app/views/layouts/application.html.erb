@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>RailsTraining</title>
-    <%= csrf_meta_tags %>
+<html lang="ja">
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <body>
+  <title><%= content_for?(:html_title) ? yield(:html_title) : 'RailsTraining' %></title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <div class="notifications">
+    <% flash.each do |key, value| %>
+    <div class="<%= key %>"><%= value %></div>
+    <% end %>
+  </div>
+  <main>
     <%= yield %>
-  </body>
+  </main>
+</body>
+
 </html>

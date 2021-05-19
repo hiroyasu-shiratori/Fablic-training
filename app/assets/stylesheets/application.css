@@ -14,7 +14,28 @@
  *= require_self
  */
 
+body {
+  margin: 0 auto;
+}
+
+main {
+  margin: 8px;
+}
+
 table, td, th {
   border-collapse: collapse;
   border: 1px solid;
+}
+
+.notifications {
+  color: #fff;
+  text-align: center;
+}
+
+.notifications .notice {
+  background-color: #66ccff;
+}
+
+.notifications .alert {
+  background-color: #FF8C3F;
 }

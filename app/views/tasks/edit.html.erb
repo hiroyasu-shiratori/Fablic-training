@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-<html lang="ja">
+<% content_for(:html_title) {'タスクの編集'} %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>タスクの編集</title>
-</head>
-
-<body>
-  <h1>タスクの編集</h1>
-  <p><%= button_to '戻る', 'javascript:history.back()', {method: :get} %></p>
-  <%= render partial: 'form', locals: {task: @task, text: '編集'} %>
-</body>
-
-</html>
+<h1>タスクの編集</h1>
+<p><%= button_to '戻る', 'javascript:history.back()', {method: :get} %></p>
+<%= render partial: 'form', locals: {task: @task, text: '編集'} %>

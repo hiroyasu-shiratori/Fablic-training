@@ -9,8 +9,12 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    @task.save
-    redirect_to root_path
+    if @task.save
+      redirect_to root_path, notice: '新しいタスクを作成しました'
+    else
+      flash.now[:alert] = 'タスクの作成ができませんでした'
+      render :new
+    end
   end
 
   def show
@@ -23,14 +27,22 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    @task.update(task_params)
-    redirect_to task_path(@task.id)
+    if @task.update(task_params)
+      redirect_to task_path(@task.id), notice: 'タスクを更新しました'
+    else
+      flash.now[:alert] = 'タスクの更新ができませんでした'
+      render task_path(@task.id)
+    end
   end
 
   def destroy
     @task = Task.find(params[:id])
-    @task.destroy
-    redirect_to root_path
+    if @task.destroy
+      redirect_to root_path, notice: 'タスクを削除しました'
+    else
+      flash.now[:alert] = 'タスクの削除ができませんでした'
+      render task_path(@task.id)
+    end
   end
 
   def task_params
