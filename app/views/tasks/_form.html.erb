@@ -5,21 +5,21 @@
 </p>
 <p>
   <%= form.label :description, '説明' %><br />
-  <%= form.text_area :description, size: '26x3', maxlength: 1000 %>
+  <%= form.text_area :description, size: '26x3', maxlength: 1000, id: 'form_description' %>
 </p>
 <p>
   <%= form.label :status, 'ステータス' %><br />
-  <%= form.select :status, [['未着手', '未着手'], ['進行中', '進行中'], ['完了', '完了']], prompt: 'タスクの状態' %>
+  <%= form.select :status, [['未着手', '未着手'], ['進行中', '進行中'], ['完了', '完了']], {prompt: 'タスクの状態'}, {id: 'form_status'} %>
 </p>
 <p>
   <%= form.label :priority, '優先度' %><br />
-  <%= form.select :priority, [['高', '高'], ['中', '中'], ['低', '低']], prompt: '優先度' %>
+  <%= form.select :priority, [['高', '高'], ['中', '中'], ['低', '低']], {prompt: '優先度'}, {id: 'form_priority'} %>
 </p>
 <p>
   <%= form.label :deadline, '期限' %><br />
-  <%= form.datetime_field :deadline %>
+  <%= form.datetime_field :deadline, id: 'form_deadline' %>
 </p>
 <p>
-  <%= form.submit text %>
+  <%= form.submit text, id: 'form_submit' %>
 </p>
 <% end %>
