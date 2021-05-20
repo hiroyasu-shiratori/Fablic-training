@@ -1,7 +1,7 @@
 <%= form_with(model: @task) do |form| %>
 <p>
   <%= form.label :title, 'タイトル' %><br />
-  <%= form.text_field :title, size: 27, maxlength: 100, required: true %>
+  <%= form.text_field :title, size: 27, maxlength: 100, required: true, id: 'form_title' %>
 </p>
 <p>
   <%= form.label :description, '説明' %><br />
