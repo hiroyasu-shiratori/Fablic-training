@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :system do
   it 'Automatically create tasks with JS' do
-    # Taskの新規作成画面を開く
+    # タスクの新規作成画面を開く
     visit new_task_path
 
     # タイトルにtestを入力
@@ -31,10 +31,10 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   it 'Automatically update tasks with JS' do
-    # 編集前のTaskを作成
-    @task = Task.create!(title: '編集前')
+    # 編集前のタスクを作成
+    @task = Task.create(title: '編集前')
 
-    # Taskの編集画面を開く
+    # タスクの編集画面を開く
     visit edit_task_path(@task.id)
 
     # タイトルに編集後を入力
@@ -45,5 +45,24 @@ RSpec.describe 'Tasks', type: :system do
 
     # 正しく更新されていること（＝画面の表示が正しいこと）を検証する
     expect(page).to have_content '編集後'
+  end
+
+  context 'Automatically destroy tasks with JS' do
+    it 'test' do
+      # 編集前のタスクを作成
+      @task = Task.create(title: '削除テスト')
+
+      # タスクの詳細画面を開く
+      visit task_path(@task.id)
+
+      # 削除実行
+      page.accept_confirm do
+        click_button 'delete_button'
+      end
+
+      expect(page).to have_current_path root_path
+
+      expect(page).to have_selector '.notice', text: 'タスクを削除しました'
+    end
   end
 end
