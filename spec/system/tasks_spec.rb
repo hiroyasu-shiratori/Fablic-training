@@ -6,7 +6,7 @@ RSpec.describe 'Tasks', type: :system do
       # 確認用のタスクを作成
       Task.create(title: '一覧テスト1')
       Task.create(title: '一覧テスト2')
-      # タスクの一覧へ移動
+      # タスクの一覧へ遷移
       visit root_path
     end
 
@@ -22,14 +22,14 @@ RSpec.describe 'Tasks', type: :system do
     it 'タスクの新規登録へ遷移するか確認' do
       # タスクの新規登録へ遷移する
       click_button 'new_button'
-      # 遷移先のタイトルを確認
-      expect(page).to have_title 'タスクの新規登録'
+      # 遷移後のpathを確認
+      expect(page).to have_current_path new_task_path
     end
   end
 
   describe '`タスクの新規登録`のテスト' do
     before do
-      # タスクの一覧へ移動
+      # タスクの一覧へ遷移
       visit new_task_path
     end
 
@@ -46,8 +46,8 @@ RSpec.describe 'Tasks', type: :system do
       fill_in 'form_deadline', with: '002023-01-01-17-28'
       # タスクの登録ボタン
       click_button 'form_submit'
-      # 遷移先のタイトルを確認
-      expect(page).to have_title 'タスクの一覧'
+      # 遷移後のpathを確認
+      expect(page).to have_current_path root_path
       # 値が追加されている確認
       expect(page).to have_content '新規登録テスト'
       expect(page).to have_content '進行中'
@@ -67,7 +67,7 @@ RSpec.describe 'Tasks', type: :system do
     before do
       # 確認用のタスクを作成
       @task = Task.create(title: '詳細テスト', description: 'タスクの詳細テスト')
-      # タスクの詳細へ移動
+      # タスクの詳細へ遷移
       visit task_path(@task.id)
     end
 
@@ -83,27 +83,35 @@ RSpec.describe 'Tasks', type: :system do
     it 'タスクの詳細へ遷移するか確認' do
       # タスクの新規登録へ遷移する
       click_button 'edit_button'
-      # 遷移先のタイトルを確認
-      expect(page).to have_title 'タスクの編集'
+      # 遷移後のpathを確認
+      expect(page).to have_current_path edit_task_path(@task.id)
     end
   end
 
-  # it 'Automatically update tasks with JS' do
-  #   # 編集前のタスクを作成
-  #   @task = Task.create(title: '編集前')
+  describe '`タスクの編集`のテスト' do
+    before do
+      # 確認用のタスクを作成
+      @task = Task.create(title: '編集テスト')
+      # タスクの編集へ遷移
+      visit edit_task_path(@task.id)
+    end
 
-  #   # タスクの編集画面を開く
-  #   visit edit_task_path(@task.id)
+    it 'ページタイトルの確認' do
+      expect(page).to have_title 'タスクの編集'
+    end
 
-  #   # タイトルに編集後を入力
-  #   fill_in 'form_title', with: '編集後'
+    it 'タスクが編集できるか確認' do
+      # フォームに値を入れる
+      fill_in 'form_title', with: '編集後のタスク'
+      # タスクの編集ボタン
+      click_button 'form_submit'
+      # 遷移後のpathを確認
+      expect(page).to have_current_path task_path(@task.id)
+      # 値が追加されている確認
+      expect(page).to have_content '編集後のタスク'
+    end
+  end
 
-  #   # 更新実行
-  #   click_button 'form_submit'
-
-  #   # 正しく更新されていること（＝画面の表示が正しいこと）を検証する
-  #   expect(page).to have_content '編集後'
-  # end
 
   # context 'Automatically destroy tasks with JS' do
   #   it 'test' do
