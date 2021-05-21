@@ -4,8 +4,8 @@ RSpec.describe 'Tasks', type: :system do
   describe '`タスクの一覧`のテスト' do
     before do
       # 確認用のタスクを作成
-      Task.create(title: 'タスク1')
-      Task.create(title: 'タスク2')
+      Task.create(title: '一覧テスト1')
+      Task.create(title: '一覧テスト2')
       # タスクの一覧へ移動
       visit root_path
     end
@@ -15,11 +15,11 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     it '全てのタスクが表示されるか確認' do
-      expect(page).to have_content 'タスク1'
-      expect(page).to have_content 'タスク2'
+      expect(page).to have_content '一覧テスト1'
+      expect(page).to have_content '一覧テスト2'
     end
 
-    it '新規登録へ遷移するか確認' do
+    it 'タスクの新規登録へ遷移するか確認' do
       # タスクの新規登録へ遷移する
       click_button 'new_button'
       # 遷移先のタイトルを確認
@@ -60,6 +60,31 @@ RSpec.describe 'Tasks', type: :system do
       click_button 'form_submit'
       # ページが遷移していない事を確認
       expect(page).to have_title 'タスクの新規登録'
+    end
+  end
+
+  describe '`タスクの詳細`のテスト' do
+    before do
+      # 確認用のタスクを作成
+      @task = Task.create(title: '詳細テスト', description: 'タスクの詳細テスト')
+      # タスクの詳細へ移動
+      visit task_path(@task.id)
+    end
+
+    it 'ページタイトルの確認' do
+      expect(page).to have_title 'タスクの詳細'
+    end
+
+    it 'タスクの詳細が表示されるか確認' do
+      expect(page).to have_content '詳細テスト'
+      expect(page).to have_content 'タスクの詳細テスト'
+    end
+
+    it 'タスクの詳細へ遷移するか確認' do
+      # タスクの新規登録へ遷移する
+      click_button 'edit_button'
+      # 遷移先のタイトルを確認
+      expect(page).to have_title 'タスクの編集'
     end
   end
 
