@@ -48,7 +48,9 @@ RSpec.describe 'Tasks', type: :system do
       click_button 'form_submit'
       # 遷移後のpathを確認
       expect(page).to have_current_path root_path
-      # 値が追加されている確認
+      # flashのメッセージを確認
+      expect(page).to have_selector '.notice', text: '新しいタスクを作成しました'
+      # 値が追加されているか確認
       expect(page).to have_content '新規登録テスト'
       expect(page).to have_content '進行中'
       expect(page).to have_content '高'
@@ -59,7 +61,7 @@ RSpec.describe 'Tasks', type: :system do
       # タスクの登録ボタン
       click_button 'form_submit'
       # ページが遷移していない事を確認
-      expect(page).to have_title 'タスクの新規登録'
+      expect(page).to have_current_path new_task_path
     end
   end
 
@@ -107,28 +109,39 @@ RSpec.describe 'Tasks', type: :system do
       click_button 'form_submit'
       # 遷移後のpathを確認
       expect(page).to have_current_path task_path(@task.id)
-      # 値が追加されている確認
+      # flashのメッセージを確認
+      expect(page).to have_selector '.notice', text: 'タスクを更新しました'
+      # 値が編集されているか確認
       expect(page).to have_content '編集後のタスク'
     end
   end
 
+  describe '`タスクの削除`のテスト' do
+    before do
+      # 確認用のタスクを作成
+      @task = Task.create(title: '削除テスト')
+      # タスクの詳細へ遷移
+      visit task_path(@task.id)
+    end
 
-  # context 'Automatically destroy tasks with JS' do
-  #   it 'test' do
-  #     # 編集前のタスクを作成
-  #     @task = Task.create(title: '削除テスト')
+    it 'タスクが削除できるか確認' do
+      # タスクの削除でokを押す
+      page.accept_confirm do
+        click_button 'delete_button'
+      end
+      # 遷移後のpathを確認
+      expect(page).to have_current_path root_path
+      # flashのメッセージを確認
+      expect(page).to have_selector '.notice', text: 'タスクを削除しました'
+    end
 
-  #     # タスクの詳細画面を開く
-  #     visit task_path(@task.id)
-
-  #     # 削除実行
-  #     page.accept_confirm do
-  #       click_button 'delete_button'
-  #     end
-
-  #     expect(page).to have_current_path root_path
-
-  #     expect(page).to have_selector '.notice', text: 'タスクを削除しました'
-  #   end
-  # end
+    it 'タスクの削除をキャンセルできるか確認' do
+      # タスクの削除でキャンセルを押す
+      page.dismiss_confirm do
+        click_button 'delete_button'
+      end
+      # ページが遷移していない事を確認
+      expect(page).to have_current_path task_path(@task.id)
+    end
+  end
 end
