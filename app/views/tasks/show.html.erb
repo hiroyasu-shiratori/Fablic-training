@@ -35,10 +35,10 @@
 <table>
   <tr>
     <td>
-      <%= button_to '削除', "/tasks/#{@task.id}", {method: :delete, data: {confirm: 'タスクを削除しても良いですか？'}} %>
+      <%= button_to '削除', "/tasks/#{@task.id}", {method: :delete, id: 'delete_button', data: {confirm: 'タスクを削除しても良いですか？'}} %>
     </td>
     <td>
-      <%= button_to '編集', edit_task_path(@task.id), {method: :get} %>
+      <%= button_to '編集', edit_task_path(@task.id), {method: :get, id: 'edit_button'} %>
     </td>
   </tr>
 </table>

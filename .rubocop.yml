@@ -53,6 +53,9 @@ Lint/UnexpectedBlockArity:
   Enabled: true
 Lint/UnmodifiedReduceAccumulator:
   Enabled: true
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
 Style/AsciiComments:
   Enabled: false
 Style/ArgumentsForwarding:
