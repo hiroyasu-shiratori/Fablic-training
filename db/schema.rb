@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210506023552) do
+ActiveRecord::Schema.define(version: 2021_05_24_021902) do
 
-  create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "title",       limit: 100,  null: false
-    t.string   "description", limit: 1000
-    t.string   "status",      limit: 10
-    t.string   "priority",    limit: 10
+  create_table "tasks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title", limit: 100, default: "タスク", null: false
+    t.string "description", limit: 1000
+    t.string "status", limit: 10, default: "未着手", null: false
+    t.string "priority", limit: 10
     t.datetime "deadline"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
