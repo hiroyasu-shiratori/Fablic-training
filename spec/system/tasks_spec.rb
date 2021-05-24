@@ -68,11 +68,14 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe '`タスクの詳細`のテスト' do
-    before do
+    let :task do
       # 確認用のタスクを作成
-      @task = Task.create(title: '詳細テスト', description: 'タスクの詳細テスト')
+      Task.create(title: '詳細テスト', description: 'タスクの詳細テスト')
+    end
+
+    before do
       # タスクの詳細へ遷移
-      visit task_path(@task.id)
+      visit task_path(task.id)
     end
 
     it 'ページタイトルの確認' do
@@ -88,16 +91,19 @@ RSpec.describe 'Tasks', type: :system do
       # タスクの新規登録へ遷移する
       click_button 'edit_button'
       # 遷移後のpathを確認
-      expect(page).to have_current_path edit_task_path(@task.id)
+      expect(page).to have_current_path edit_task_path(task.id)
     end
   end
 
   describe '`タスクの編集`のテスト' do
-    before do
+    let :task do
       # 確認用のタスクを作成
-      @task = Task.create(title: '編集テスト')
+      Task.create(title: '編集テスト')
+    end
+
+    before do
       # タスクの編集へ遷移
-      visit edit_task_path(@task.id)
+      visit edit_task_path(task.id)
     end
 
     it 'ページタイトルの確認' do
@@ -110,7 +116,7 @@ RSpec.describe 'Tasks', type: :system do
       # タスクの編集ボタン
       click_button 'form_submit'
       # 遷移後のpathを確認
-      expect(page).to have_current_path task_path(@task.id)
+      expect(page).to have_current_path task_path(task.id)
       # flashのメッセージを確認
       expect(page).to have_selector '.notice', text: 'タスクを更新しました'
       # 値が編集されているか確認
@@ -119,11 +125,14 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe '`タスクの削除`のテスト' do
-    before do
+    let :task do
       # 確認用のタスクを作成
-      @task = Task.create(title: '削除テスト')
+      Task.create(title: '削除テスト')
+    end
+
+    before do
       # タスクの詳細へ遷移
-      visit task_path(@task.id)
+      visit task_path(task.id)
     end
 
     it 'タスクが削除できるか確認' do
@@ -143,7 +152,7 @@ RSpec.describe 'Tasks', type: :system do
         click_button 'delete_button'
       end
       # ページが遷移していない事を確認
-      expect(page).to have_current_path task_path(@task.id)
+      expect(page).to have_current_path task_path(task.id)
     end
   end
 end
