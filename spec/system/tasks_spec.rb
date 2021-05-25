@@ -4,10 +4,15 @@ require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :system do
   describe '`タスクの一覧`のテスト' do
+    # 確認用のタスクを作成
+    let(:task1) { create(:task, title: 'タスク1') }
+    let(:task2) { create(:task, title: 'タスク2') }
+
     before do
-      # 確認用のタスクを作成
-      Task.create(title: '一覧テスト1')
-      Task.create(title: '一覧テスト2')
+      # 作成したタスクindexで読み込む
+      task1
+      task2
+
       # タスクの一覧へ遷移
       visit root_path
     end
@@ -17,8 +22,8 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     it '全てのタスクが表示されるか確認' do
-      expect(page).to have_content '一覧テスト1'
-      expect(page).to have_content '一覧テスト2'
+      expect(page).to have_content task1.title
+      expect(page).to have_content task2.title
     end
 
     it 'タスクの新規登録へ遷移するか確認' do
@@ -82,7 +87,7 @@ RSpec.describe 'Tasks', type: :system do
 
   describe '`タスクの詳細`のテスト' do
     # 確認用のタスクを作成
-    let(:task) { Task.create(title: '詳細テスト', description: 'タスクの詳細テスト') }
+    let(:task) { create(:task, description: 'タスクの詳細テスト') }
 
     before do
       # タスクの詳細へ遷移
@@ -94,8 +99,8 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     it 'タスクの詳細が表示されるか確認' do
-      expect(page).to have_content '詳細テスト'
-      expect(page).to have_content 'タスクの詳細テスト'
+      expect(page).to have_content task.title
+      expect(page).to have_content task.description
     end
 
     it 'タスクの詳細へ遷移するか確認' do
@@ -108,7 +113,7 @@ RSpec.describe 'Tasks', type: :system do
 
   describe '`タスクの編集`のテスト' do
     # 確認用のタスクを作成
-    let(:task) { Task.create(title: '編集テスト') }
+    let(:task) { create(:task) }
 
     before do
       # タスクの編集へ遷移
@@ -155,7 +160,7 @@ RSpec.describe 'Tasks', type: :system do
 
   describe '`タスクの削除`のテスト' do
     # 確認用のタスクを作成
-    let(:task) { Task.create(title: '削除テスト') }
+    let(:task) { create(:task) }
 
     before do
       # タスクの詳細へ遷移
