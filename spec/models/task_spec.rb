@@ -74,7 +74,7 @@ RSpec.describe Task, type: :model do
       end
     end
 
-    context '`status`が0文字の場合、有効' do
+    context '`status`が0文字の場合、無効' do
       let(:status) { 'A' * 0 }
       it do
         expect(task).to_not be_valid
@@ -84,9 +84,29 @@ RSpec.describe Task, type: :model do
   end
 
   describe '`priority`のバリデーションをテスト' do
-    context '`priority`が10文字の場合、有効'
-    context '`priority`が11文字の場合、無効'
-    context '`priority`が0文字の場合、有効'
+    let(:task) { build(:task, priority: priority) }
+
+    context '`priority`が10文字の場合、有効' do
+      let(:priority) { 'A' * 10 }
+      it do
+        expect(task).to be_valid
+      end
+    end
+
+    context '`priority`が11文字の場合、無効' do
+      let(:priority) { 'A' * 11 }
+      it do
+        expect(task).to_not be_valid
+        expect(task.errors.full_messages).to match_array('Priority is too long (maximum is 10 characters)')
+      end
+    end
+
+    context '`priority`が0文字の場合、有効' do
+      let(:priority) { 'A' * 0 }
+      it do
+        expect(task).to be_valid
+      end
+    end
   end
 
   describe '`deadline`のバリデーションをテスト' do
