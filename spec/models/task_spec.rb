@@ -57,9 +57,30 @@ RSpec.describe Task, type: :model do
   end
 
   describe '`status`のバリデーションをテスト' do
-    context '`status`が10文字の場合、有効'
-    context '`status`が11文字の場合、無効'
-    context '`status`が0文字の場合、無効'
+    let(:task) { build(:task, status: status) }
+
+    context '`status`が10文字の場合、有効' do
+      let(:status) { 'A' * 10 }
+      it do
+        expect(task).to be_valid
+      end
+    end
+
+    context '`status`が11文字の場合、無効' do
+      let(:status) { 'A' * 11 }
+      it do
+        expect(task).to_not be_valid
+        expect(task.errors.full_messages).to match_array('Status is too long (maximum is 10 characters)')
+      end
+    end
+
+    context '`status`が0文字の場合、有効' do
+      let(:status) { 'A' * 0 }
+      it do
+        expect(task).to_not be_valid
+        expect(task.errors.full_messages).to match_array("Status can't be blank")
+      end
+    end
   end
 
   describe '`priority`のバリデーションをテスト' do
