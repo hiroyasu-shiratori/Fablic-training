@@ -6,7 +6,9 @@ RSpec.describe 'Tasks', type: :system do
   describe '`タスクの一覧`のテスト' do
     # 確認用のタスクを作成
     let!(:task1) { create(:task, title: 'タスク1') }
-    let!(:task2) { create(:task, title: 'タスク2') }
+    let!(:task2) { create(:task, title: 'タスク2', status: '未着手') }
+    let!(:task3) { create(:task, title: 'テスト1', status: '完了') }
+    let!(:task4) { create(:task, title: 'テスト2', status: '未着手') }
 
     before do
       # タスクの一覧へ遷移
@@ -17,16 +19,35 @@ RSpec.describe 'Tasks', type: :system do
       expect(page).to have_title 'タスクの一覧'
     end
 
-    it '全てのタスクが表示されるか確認' do
-      expect(page).to have_content task1.title
-      expect(page).to have_content task2.title
-    end
-
     it 'タスクの新規登録へ遷移するか確認' do
       # タスクの新規登録へ遷移する
       click_button 'new_button'
       # 遷移後のpathを確認
       expect(page).to have_current_path new_task_path
+    end
+
+    context '表示・検索のテスト' do
+      it '絞り込みなしの確認' do
+        expect(page).to have_content task1.title
+        expect(page).to have_content task2.title
+        expect(page).to have_content task3.title
+        expect(page).to have_content task4.title
+      end
+
+      it 'タイトルをタスクで絞り込み' do
+        expect(page).to have_content task1.title
+        expect(page).to have_content task2.title
+      end
+
+      it 'ステータスを未着手で絞り込み' do
+        expect(page).to have_content task2.status
+        expect(page).to have_content task4.status
+      end
+
+      it 'タイトルをタスク、ステータスを未着手で絞り込み' do
+        expect(page).to have_content task2.title
+        expect(page).to have_content task2.status
+      end
     end
   end
 
