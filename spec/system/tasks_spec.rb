@@ -4,10 +4,11 @@ require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :system do
   describe '`タスクの一覧`のテスト' do
+    # 確認用のタスクを作成
+    let!(:task1) { create(:task, title: 'タスク1') }
+    let!(:task2) { create(:task, title: 'タスク2') }
+
     before do
-      # 確認用のタスクを作成
-      Task.create(title: '一覧テスト1')
-      Task.create(title: '一覧テスト2')
       # タスクの一覧へ遷移
       visit root_path
     end
@@ -17,8 +18,8 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     it '全てのタスクが表示されるか確認' do
-      expect(page).to have_content '一覧テスト1'
-      expect(page).to have_content '一覧テスト2'
+      expect(page).to have_content task1.title
+      expect(page).to have_content task2.title
     end
 
     it 'タスクの新規登録へ遷移するか確認' do
@@ -60,18 +61,29 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     it '入力必須の確認' do
+      # タイトルの中身を空にする
+      fill_in 'form_title', with: ''
       # タスクの登録ボタン
       click_button 'form_submit'
       # ページが遷移していない事を確認
       expect(page).to have_current_path new_task_path
     end
+
+    it '空白文字の確認' do
+      # タイトルの中身を空白にする
+      fill_in 'form_title', with: ' '
+      # タスクの登録ボタン
+      click_button 'form_submit'
+      # 遷移後のpathを確認
+      expect(page).to have_current_path tasks_path
+      # flashのメッセージを確認
+      expect(page).to have_selector '.alert', text: 'タスクの作成ができませんでした'
+    end
   end
 
   describe '`タスクの詳細`のテスト' do
-    let :task do
-      # 確認用のタスクを作成
-      Task.create(title: '詳細テスト', description: 'タスクの詳細テスト')
-    end
+    # 確認用のタスクを作成
+    let(:task) { create(:task, description: 'タスクの詳細テスト') }
 
     before do
       # タスクの詳細へ遷移
@@ -83,8 +95,8 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     it 'タスクの詳細が表示されるか確認' do
-      expect(page).to have_content '詳細テスト'
-      expect(page).to have_content 'タスクの詳細テスト'
+      expect(page).to have_content task.title
+      expect(page).to have_content task.description
     end
 
     it 'タスクの詳細へ遷移するか確認' do
@@ -96,10 +108,8 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe '`タスクの編集`のテスト' do
-    let :task do
-      # 確認用のタスクを作成
-      Task.create(title: '編集テスト')
-    end
+    # 確認用のタスクを作成
+    let(:task) { create(:task) }
 
     before do
       # タスクの編集へ遷移
@@ -122,13 +132,31 @@ RSpec.describe 'Tasks', type: :system do
       # 値が編集されているか確認
       expect(page).to have_content '編集後のタスク'
     end
+
+    it '入力必須の確認' do
+      # タイトルの中身を空にする
+      fill_in 'form_title', with: ''
+      # タスクの登録ボタン
+      click_button 'form_submit'
+      # ページが遷移していない事を確認
+      expect(page).to have_current_path edit_task_path(task.id)
+    end
+
+    it '空白文字の確認' do
+      # タイトルの中身を空白にする
+      fill_in 'form_title', with: ' '
+      # タスクの登録ボタン
+      click_button 'form_submit'
+      # 遷移後のpathを確認
+      expect(page).to have_current_path task_path(task.id)
+      # flashのメッセージを確認
+      expect(page).to have_selector '.alert', text: 'タスクの更新ができませんでした'
+    end
   end
 
   describe '`タスクの削除`のテスト' do
-    let :task do
-      # 確認用のタスクを作成
-      Task.create(title: '削除テスト')
-    end
+    # 確認用のタスクを作成
+    let(:task) { create(:task) }
 
     before do
       # タスクの詳細へ遷移

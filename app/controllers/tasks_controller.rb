@@ -15,7 +15,7 @@ class TasksController < ApplicationController
       redirect_to root_path, notice: '新しいタスクを作成しました'
     else
       flash.now[:alert] = 'タスクの作成ができませんでした'
-      render :new
+      render new_task_path
     end
   end
 
@@ -33,7 +33,7 @@ class TasksController < ApplicationController
       redirect_to task_path(@task.id), notice: 'タスクを更新しました'
     else
       flash.now[:alert] = 'タスクの更新ができませんでした'
-      render task_path(@task.id)
+      render :new
     end
   end
 
@@ -43,7 +43,7 @@ class TasksController < ApplicationController
       redirect_to root_path, notice: 'タスクを削除しました'
     else
       flash.now[:alert] = 'タスクの削除ができませんでした'
-      render task_path(@task.id)
+      render :edit
     end
   end
 
