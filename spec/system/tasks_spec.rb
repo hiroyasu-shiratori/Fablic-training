@@ -5,14 +5,10 @@ require 'rails_helper'
 RSpec.describe 'Tasks', type: :system do
   describe '`タスクの一覧`のテスト' do
     # 確認用のタスクを作成
-    let(:task1) { create(:task, title: 'タスク1') }
-    let(:task2) { create(:task, title: 'タスク2') }
+    let!(:task1) { create(:task, title: 'タスク1') }
+    let!(:task2) { create(:task, title: 'タスク2') }
 
     before do
-      # 作成したタスクindexで読み込む
-      task1
-      task2
-
       # タスクの一覧へ遷移
       visit root_path
     end
