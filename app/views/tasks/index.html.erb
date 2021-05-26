@@ -2,6 +2,20 @@
 
 <h1>タスクの一覧</h1>
 
+<div>
+  <%= form_with url: tasks_path, method: :get, local: true do |form| %>
+  <p>
+    <%= form.label :title, 'タイトル' %>
+    <%= form.text_field :title, value: @search_params[:title] %>
+  </p>
+  <p>
+    <%= form.label :status, 'ステータス' %>
+    <%= form.select :status, [['未着手', '未着手'], ['進行中', '進行中'], ['完了', '完了']], {prompt: 'タスクの状態'} %>
+    <%= form.submit '検索' %>
+  </p>
+  <% end %>
+</div>
+
 <p><%= button_to '新規登録', {controller: 'tasks', action: 'new'}, {method: :get, id: 'new_button'} %></p>
 
 <table>
