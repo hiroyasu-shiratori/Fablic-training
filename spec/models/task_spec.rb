@@ -17,7 +17,7 @@ RSpec.describe Task, type: :model do
       let(:title) { 'A' * 101 }
       it '無効' do
         expect(task).to_not be_valid
-        expect(task.errors.full_messages).to match_array('Title is too long (maximum is 100 characters)')
+        expect(task.errors.full_messages).to contain_exactly('Title is too long (maximum is 100 characters)')
       end
     end
 
@@ -25,7 +25,7 @@ RSpec.describe Task, type: :model do
       let(:title) { 'A' * 0 }
       it '無効' do
         expect(task).to_not be_valid
-        expect(task.errors.full_messages).to match_array("Title can't be blank")
+        expect(task.errors.full_messages).to contain_exactly("Title can't be blank")
       end
     end
   end
@@ -44,7 +44,7 @@ RSpec.describe Task, type: :model do
       let(:description) { 'A' * 1001 }
       it '無効' do
         expect(task).to_not be_valid
-        expect(task.errors.full_messages).to match_array('Description is too long (maximum is 1000 characters)')
+        expect(task.errors.full_messages).to contain_exactly('Description is too long (maximum is 1000 characters)')
       end
     end
 
@@ -59,26 +59,46 @@ RSpec.describe Task, type: :model do
   describe '`status`のバリデーションをテスト' do
     let(:task) { build(:task, status: status) }
 
-    context '`status`が10文字の場合' do
-      let(:status) { 'A' * 10 }
+    context '`status`が未着手の場合' do
+      let(:status) { '未着手' }
       it '有効' do
         expect(task).to be_valid
       end
     end
 
-    context '`status`が11文字の場合' do
-      let(:status) { 'A' * 11 }
-      it '無効' do
-        expect(task).to_not be_valid
-        expect(task.errors.full_messages).to match_array('Status is too long (maximum is 10 characters)')
+    context '`status`が進行中の場合' do
+      let(:status) { '進行中' }
+      it '有効' do
+        expect(task).to be_valid
       end
     end
 
-    context '`status`が0文字の場合' do
-      let(:status) { 'A' * 0 }
+    context '`status`が完了の場合' do
+      let(:status) { '完了' }
+      it '有効' do
+        expect(task).to be_valid
+      end
+    end
+
+    context '`status`が関係ない文字の場合' do
+      let(:status) { 'A' * 20 }
       it '無効' do
         expect(task).to_not be_valid
-        expect(task.errors.full_messages).to match_array("Status can't be blank")
+        expect(task.errors.full_messages).to contain_exactly(
+          'Status is not included in the list',
+          'Status is too long (maximum is 10 characters)'
+        )
+      end
+    end
+
+    context '`status`が空文字の場合' do
+      let(:status) { '' }
+      it '無効' do
+        expect(task).to_not be_valid
+        expect(task.errors.full_messages).to contain_exactly(
+          "Status can't be blank",
+          'Status is not included in the list'
+        )
       end
     end
   end
@@ -86,25 +106,35 @@ RSpec.describe Task, type: :model do
   describe '`priority`のバリデーションをテスト' do
     let(:task) { build(:task, priority: priority) }
 
-    context '`priority`が10文字の場合' do
-      let(:priority) { 'A' * 10 }
+    context '`priority`が高の場合' do
+      let(:priority) { '高' }
       it '有効' do
         expect(task).to be_valid
       end
     end
 
-    context '`priority`が11文字の場合' do
-      let(:priority) { 'A' * 11 }
+    context '`priority`が中の場合' do
+      let(:priority) { '中' }
+      it '有効' do
+        expect(task).to be_valid
+      end
+    end
+
+    context '`priority`が低の場合' do
+      let(:priority) { '低' }
+      it '有効' do
+        expect(task).to be_valid
+      end
+    end
+
+    context '`priority`が関係ない文字の場合' do
+      let(:priority) { 'A' * 20 }
       it '無効' do
         expect(task).to_not be_valid
-        expect(task.errors.full_messages).to match_array('Priority is too long (maximum is 10 characters)')
-      end
-    end
-
-    context '`priority`が0文字の場合' do
-      let(:priority) { 'A' * 0 }
-      it '有効' do
-        expect(task).to be_valid
+        expect(task.errors.full_messages).to contain_exactly(
+          'Priority is not included in the list',
+          'Priority is too long (maximum is 10 characters)'
+        )
       end
     end
   end
