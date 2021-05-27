@@ -8,3 +8,6 @@
 
 User.create(name: 'tanaka')
 User.create(name: 'yamane')
+
+Task.create(user_id: 1, title: 'tanakaタスク')
+Task.create(user_id: 2, title: 'yamaneタスク', status: '進行中')
