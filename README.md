@@ -11,7 +11,7 @@
 ### Usersテーブル
 |      Field      |     Type     | Null | Key | Default |     Extra      |
 | --------------- | ------------ | ---- | --- | ------- | -------------- |
-| id              | BIGINT(20)   | NO   | PRI | NULL    | AUTO_INCREMENT |
+| id              | int          | NO   | PRI | NULL    | AUTO_INCREMENT |
 | name            | VARCHAR(100) | NO   |     | NULL    |                |
 | password_digest | VARCHAR(255) | NO   |     | NULL    |                |
 | authority       | VARCHAR(20)  | NO   |     | NULL    |                |
@@ -21,8 +21,8 @@
 ### Tasksテーブル
 |    Field    |     Type      | Null | Key | Default |     Extra      |
 | ----------- | ------------- | ---- | --- | ------- | -------------- |
-| id          | BIGINT(20)    | NO   | PRI | NULL    | AUTO_INCREMENT |
-| user_id     | VARCHAR(20)   | NO   |     | NULL    |                |
+| id          | int           | NO   | PRI | NULL    | AUTO_INCREMENT |
+| user_id     | VARCHAR(20)   | YES  |     | NULL    |                |
 | title       | VARCHAR(100)  | NO   |     | タスク   |                |
 | description | VARCHAR(1000) | YES  |     | NULL    |                |
 | status      | VARCHAR(10)   | NO   |     | 未着手   |                |
