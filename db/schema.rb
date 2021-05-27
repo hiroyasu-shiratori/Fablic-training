@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_24_021902) do
+ActiveRecord::Schema.define(version: 2021_05_27_021404) do
 
   create_table "tasks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", limit: 100, default: "タスク", null: false
@@ -18,6 +18,12 @@ ActiveRecord::Schema.define(version: 2021_05_24_021902) do
     t.string "status", limit: 10, default: "未着手", null: false
     t.string "priority", limit: 10
     t.datetime "deadline"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", limit: 100, default: "ユーザー", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

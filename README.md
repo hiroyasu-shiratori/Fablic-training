@@ -12,7 +12,6 @@
 |      Field      |     Type     | Null | Key | Default |     Extra      |
 | --------------- | ------------ | ---- | --- | ------- | -------------- |
 | id              | BIGINT(20)   | NO   | PRI | NULL    | AUTO_INCREMENT |
-| user_id         | VARCHAR(20)  | NO   |     | NULL    |                |
 | name            | VARCHAR(100) | NO   |     | NULL    |                |
 | password_digest | VARCHAR(255) | NO   |     | NULL    |                |
 | authority       | VARCHAR(20)  | NO   |     | NULL    |                |
