@@ -7,7 +7,6 @@ class Task < ApplicationRecord
   validates :priority, length: { maximum: 10 }, inclusion: { in: ['高', '中', '低', '', nil] }
 
   scope :search, lambda { |search_params|
-    logger.debug search_params
     return if search_params.blank?
 
     title_like(search_params[:title])
