@@ -3,8 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
+  let(:user) { create(:user) }
+
   describe '`title`のバリデーションをテスト' do
-    let(:task) { build(:task, title: title) }
+    let(:task) { build(:task, title: title, user_id: user.id) }
 
     context '`title`が100文字の場合' do
       let(:title) { 'A' * 100 }
@@ -31,7 +33,7 @@ RSpec.describe Task, type: :model do
   end
 
   describe '`description`のバリデーションをテスト' do
-    let(:task) { build(:task, description: description) }
+    let(:task) { build(:task, description: description, user_id: user.id) }
 
     context '`description`が1000文字の場合' do
       let(:description) { 'A' * 1000 }
@@ -57,7 +59,7 @@ RSpec.describe Task, type: :model do
   end
 
   describe '`status`のバリデーションをテスト' do
-    let(:task) { build(:task, status: status) }
+    let(:task) { build(:task, status: status, user_id: user.id) }
 
     context '`status`が未着手の場合' do
       let(:status) { '未着手' }
@@ -104,7 +106,7 @@ RSpec.describe Task, type: :model do
   end
 
   describe '`priority`のバリデーションをテスト' do
-    let(:task) { build(:task, priority: priority) }
+    let(:task) { build(:task, priority: priority, user_id: user.id) }
 
     context '`priority`が高の場合' do
       let(:priority) { '高' }

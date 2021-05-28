@@ -3,12 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :system do
+  let(:user) { create(:user) }
+
   describe '`タスクの一覧`のテスト' do
     # 確認用のタスクを作成
-    let!(:task1) { create(:task, title: 'タスク1') }
-    let!(:task2) { create(:task, title: 'タスク2', status: '未着手') }
-    let!(:task3) { create(:task, title: 'テスト1', status: '完了') }
-    let!(:task4) { create(:task, title: 'テスト2', status: '未着手') }
+    let!(:task1) { create(:task, title: 'タスク1', user_id: user.id) }
+    let!(:task2) { create(:task, title: 'タスク2', status: '未着手', user_id: user.id) }
+    let!(:task3) { create(:task, title: 'テスト1', status: '完了', user_id: user.id) }
+    let!(:task4) { create(:task, title: 'テスト2', status: '未着手', user_id: user.id) }
 
     before do
       # タスクの一覧へ遷移
@@ -104,7 +106,7 @@ RSpec.describe 'Tasks', type: :system do
 
   describe '`タスクの詳細`のテスト' do
     # 確認用のタスクを作成
-    let(:task) { create(:task, description: 'タスクの詳細テスト') }
+    let(:task) { create(:task, description: 'タスクの詳細テスト', user_id: user.id) }
 
     before do
       # タスクの詳細へ遷移
@@ -130,7 +132,7 @@ RSpec.describe 'Tasks', type: :system do
 
   describe '`タスクの編集`のテスト' do
     # 確認用のタスクを作成
-    let(:task) { create(:task) }
+    let(:task) { create(:task, user_id: user.id) }
 
     before do
       # タスクの編集へ遷移
@@ -177,7 +179,7 @@ RSpec.describe 'Tasks', type: :system do
 
   describe '`タスクの削除`のテスト' do
     # 確認用のタスクを作成
-    let(:task) { create(:task) }
+    let(:task) { create(:task, user_id: user.id) }
 
     before do
       # タスクの詳細へ遷移
