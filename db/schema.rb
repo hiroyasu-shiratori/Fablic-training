@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_27_022655) do
+ActiveRecord::Schema.define(version: 2021_05_31_005553) do
 
   create_table "tasks", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.string "title", limit: 100, default: "タスク", null: false
     t.string "description", limit: 1000
     t.string "status", limit: 10, default: "未着手", null: false

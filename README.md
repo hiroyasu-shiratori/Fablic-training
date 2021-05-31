@@ -22,7 +22,7 @@
 |    Field    |     Type      | Null | Key | Default |     Extra      |
 | ----------- | ------------- | ---- | --- | ------- | -------------- |
 | id          | int           | NO   | PRI | NULL    | AUTO_INCREMENT |
-| user_id     | VARCHAR(20)   | YES  |     | NULL    |                |
+| user_id     | VARCHAR(20)   | NO   |     | NULL    |                |
 | title       | VARCHAR(100)  | NO   |     | タスク   |                |
 | description | VARCHAR(1000) | YES  |     | NULL    |                |
 | status      | VARCHAR(10)   | NO   |     | 未着手   |                |
