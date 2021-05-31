@@ -3,7 +3,7 @@
 class TasksController < ApplicationController
   def index
     @search_params = task_search_params
-    @tasks = Task.search(@search_params)
+    @tasks = Task.search(@search_params).includes(:user)
   end
 
   def new
@@ -12,6 +12,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @task['user_id'] = 1 # ユーザーのログイン機能を作成していないので、ひとまず1で登録
     if @task.save
       redirect_to root_path, notice: '新しいタスクを作成しました'
     else
